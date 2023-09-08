@@ -6,7 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
-
+import java.util.Timer;
+import java.util.TimerTask;
 public class GamePanel extends JPanel implements Runnable{
 	
 	//SCREEN SETTINGS
@@ -26,10 +27,13 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler();			
 	Thread gameThread;
-	
+
 	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
+	int playerY = 350;
+	float playerSpeedup = 8;
+
+	float gravity = 0.5f;
+
 	
 	public GamePanel() {
 		
@@ -81,22 +85,22 @@ public class GamePanel extends JPanel implements Runnable{
 
 		
 	}
+
 	public void update() {
-		
+
 		if (keyH.upPressed == true) {
-			playerY -= playerSpeed;
+			playerY -= playerSpeedup;
+
+        }
+		if (keyH.downPressed == true) {
+			float kemmy = (float) playerY;
+			kemmy += gravity;
+			playerY = (int) kemmy / 10000000;
+
 		}
-		else if (keyH.downPressed == true ) {
-			playerY += playerSpeed;
-		}
-		else if (keyH.leftPressed == true) {
-			playerX -= playerSpeed;
-		}
-		else if (keyH.rightPressed == true) {
-			playerX += playerSpeed;
-		}
-		
-	}
+
+
+    }
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
