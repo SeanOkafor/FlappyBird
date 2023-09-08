@@ -6,7 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
-
+import java.util.Timer;
+import java.util.TimerTask;
 public class GamePanel extends JPanel implements Runnable{
 	
 	//SCREEN SETTINGS
@@ -28,8 +29,9 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	
 	int playerX = 100;
-	int playerY = 100;
-	int playerSpeed = 4;
+	int playerY = 350;
+	int playerSpeedup = 10;
+
 	
 	public GamePanel() {
 		
@@ -82,19 +84,29 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	public void update() {
-		
+		Timer timer = new Timer();
+
 		if (keyH.upPressed == true) {
-			playerY -= playerSpeed;
+			playerY -= playerSpeedup;
+
 		}
-		else if (keyH.downPressed == true ) {
-			playerY += playerSpeed;
+		if (keyH.downPressed == true) {
+
+			timer.scheduleAtFixedRate(new TimerTask() {
+				@Override
+				public void run() {
+					int playerSpeeddown = 0;
+
+					if (keyH.downPressed) {
+						// Increase the speed by 1
+						playerSpeeddown += 1;
+						// Update the player's position
+						playerY += playerSpeeddown;
+					}
+				}
+			}, 0, 100);
 		}
-		else if (keyH.leftPressed == true) {
-			playerX -= playerSpeed;
-		}
-		else if (keyH.rightPressed == true) {
-			playerX += playerSpeed;
-		}
+
 		
 	}
 	public void paintComponent(Graphics g) {
