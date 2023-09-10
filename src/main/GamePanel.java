@@ -103,6 +103,7 @@ public class GamePanel extends JPanel implements Runnable{
 						// Update the player's position
 						playerY += playerSpeeddown;
 					}
+
 				}
 			}, 0, 100);
 		}
