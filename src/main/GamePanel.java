@@ -1,10 +1,16 @@
 package main;
 
+import entity.Player;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,11 +20,13 @@ public class GamePanel extends JPanel implements Runnable{
 	final int originalTileSize = 16; // 16x16
 	final int scale = 3;
 	
-	final int tileSize = originalTileSize * scale; // 48x48
-	final int maxScreenCol = 12;
-	final int maxScreenRow = 17;
+	public final int tileSize = originalTileSize * scale; // 48x48
+	final int maxScreenCol = 18;
+	final int maxScreenRow = 10;
 	final int screenWidth = tileSize * maxScreenCol; // 768 pixels
 	final int screenHeight = tileSize * maxScreenRow; // 576 pixels
+	public  BufferedImage bg;
+	
 	
 	//FPS
 	
@@ -27,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler();			
 	Thread gameThread;
+	Player player = new Player(this,keyH);
 	
 	int playerX = 100;
 	int playerY = 350;
@@ -88,35 +97,41 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	public void update() {
+		//calling on player class to consistently update the game with live inputs
 
-		if (keyH.upPressed ) {
-			playerY -= playerSpeedup;
-			playerSpeedDown = 1;
+		player.update();
 
-		}
-		//so I added these lines below so while downpressed is true and the speed is less than the max gravity will occur
-		if(keyH.downPressed && playerSpeedDown < MAXSPEED){
-			playerSpeedDown += gravity;
-		}
-		//this basically acts as a floor at Y level 600
-		if (keyH.downPressed ) {
-			if(playerY < 600){
-				playerY += playerSpeedDown;
-			}
 
-		}
 
 		
 	}
+	public void getBackgroundImage() {
+
+		//introducing the background into the programme
+		try {
+			bg = ImageIO.read(getClass().getResourceAsStream("/player/background.png"));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	//public void draw(Graphics2D g2) {
+		
+		//g2.drawImage(bg, 0, 0, tileSize, tileSize, null);
+		
+	//}
+
+	
 	public void paintComponent(Graphics g) {
+		//calling on previous method of the background
+		getBackgroundImage();
 		
 		super.paintComponent(g);
-		
 		Graphics2D g2 = (Graphics2D)g;
-		
-		g2.setColor(Color.white);
-		
-		g2.fillRect(playerX, playerY, tileSize, tileSize);
+		g2.drawImage(bg, 0,0, 904, 504, null); //painting the background to the screen dimensions (subject to change)
+
+
+		player.draw(g2); //drawing the bird into the game
+
 		
 		g2.dispose();
 	}
