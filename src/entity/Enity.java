@@ -7,7 +7,7 @@ public class Enity {
     //player variables all kept here in one place
 
     public int x, y;
-    int playerSpeedup = 10;
+    int playerSpeedup = 9;
     double playerSpeedDown = 1;
     //Created a new variable called gravity it basically acts as the acceleration
     double gravity = 0.3;
