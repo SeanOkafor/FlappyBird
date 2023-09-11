@@ -27,12 +27,10 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler();			
 	Thread gameThread;
-
+	
 	int playerX = 100;
 	int playerY = 350;
-	float playerSpeedup = 8;
-
-	float gravity = 0.5f;
+	int playerSpeedup = 10;
 
 	
 	public GamePanel() {
@@ -85,22 +83,32 @@ public class GamePanel extends JPanel implements Runnable{
 
 		
 	}
-
 	public void update() {
+		Timer timer = new Timer();
 
 		if (keyH.upPressed == true) {
 			playerY -= playerSpeedup;
 
-        }
+		}
 		if (keyH.downPressed == true) {
-			float kemmy = (float) playerY;
-			kemmy += gravity;
-			playerY = (int) kemmy / 10000000;
 
+			timer.scheduleAtFixedRate(new TimerTask() {
+				@Override
+				public void run() {
+					int playerSpeeddown = 0;
+
+					if (keyH.downPressed) {
+						// Increase the speed by 1
+						playerSpeeddown += 1;
+						// Update the player's position
+						playerY += playerSpeeddown;
+					}
+				}
+			}, 0, 100);
 		}
 
-
-    }
+		
+	}
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
