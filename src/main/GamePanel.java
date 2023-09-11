@@ -6,14 +6,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import java.util.Timer;
-import java.util.TimerTask;
 public class GamePanel extends JPanel implements Runnable{
 	
 	//SCREEN SETTINGS
@@ -37,15 +34,9 @@ public class GamePanel extends JPanel implements Runnable{
 	Thread gameThread;
 	Player player = new Player(this,keyH);
 	
-	int playerX = 100;
-	int playerY = 350;
-	int playerSpeedup = 10;
-	double playerSpeedDown = 1;
 	//Created a new variable called gravity it basically acts as the acceleration
-	double gravity = 0.3;
 	//I added a max speed that the object can fall at
-	double MAXSPEED = 11;
-	
+
 	public GamePanel() {
 		
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -114,11 +105,8 @@ public class GamePanel extends JPanel implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	//public void draw(Graphics2D g2) {
-		
-		//g2.drawImage(bg, 0, 0, tileSize, tileSize, null);
-		
-	//}
+
+
 
 	
 	public void paintComponent(Graphics g) {
