@@ -31,7 +31,11 @@ public class GamePanel extends JPanel implements Runnable{
 	int playerX = 100;
 	int playerY = 350;
 	int playerSpeedup = 10;
-
+	double playerSpeedDown = 1;
+	//Created a new variable called gravity it basically acts as the acceleration
+	double gravity = 0.3;
+	//I added a max speed that the object can fall at
+	double MAXSPEED = 11;
 	
 	public GamePanel() {
 		
@@ -84,27 +88,22 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	public void update() {
-		Timer timer = new Timer();
 
-		if (keyH.upPressed == true) {
+		if (keyH.upPressed ) {
 			playerY -= playerSpeedup;
+			playerSpeedDown = 1;
 
 		}
-		if (keyH.downPressed == true) {
+		//so I added these lines below so while downpressed is true and the speed is less than the max gravity will occur
+		if(keyH.downPressed && playerSpeedDown < MAXSPEED){
+			playerSpeedDown += gravity;
+		}
+		//this basically acts as a floor at Y level 600
+		if (keyH.downPressed ) {
+			if(playerY < 600){
+				playerY += playerSpeedDown;
+			}
 
-			timer.scheduleAtFixedRate(new TimerTask() {
-				@Override
-				public void run() {
-					int playerSpeeddown = 0;
-
-					if (keyH.downPressed) {
-						// Increase the speed by 1
-						playerSpeeddown += 1;
-						// Update the player's position
-						playerY += playerSpeeddown;
-					}
-				}
-			}, 0, 100);
 		}
 
 		
