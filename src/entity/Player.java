@@ -25,8 +25,8 @@ public class Player extends Enity{
     }
     public void setDefaultValues() {
 
-        x = 100; // same values as "playerX and Y, just moved here for simplicities sake
-        y = 100;
+        x = 40; // same values as "playerX and Y, just moved here for simplicities sake
+        y = 200;
         direction = "bird";
     }
     public void getPlayerImage() {
@@ -54,7 +54,7 @@ public class Player extends Enity{
         }
         //this basically acts as a floor at Y level 600
         if (keyH.downPressed) {
-            if (y < 400) {
+            if (y < 465) {
                 y += playerSpeedDown;
             }
 
