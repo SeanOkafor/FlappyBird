@@ -23,8 +23,8 @@ public class GamePanel extends JPanel implements Runnable{
 	//SCREEN SETTINGS
 	
 	public final int tileSize = originalTileSize * scale; // 48x48
-	final int maxScreenCol = 18;
-	final int maxScreenRow = 10;
+	final int maxScreenCol = 7;
+	final int maxScreenRow = 11;
 	final int screenWidth = tileSize * maxScreenCol; // 768 pixels
 	final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 	public  BufferedImage bg;
@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void getBackgroundImage() {
 
-		//introducing the background into the programme
+		//introducing the background into the program
 		try {
 			bg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/background.png")));
 		}catch(IOException e) {
