@@ -25,7 +25,7 @@ public class Player extends Enity{
     }
     public void setDefaultValues() {
 
-        x = 40; // same values as "playerX and Y, just moved here for simplicities sake
+        x = 40; // same values as "playerX and Y, just moved here for simplicity sake
         y = 200;
         direction = "bird";
     }
