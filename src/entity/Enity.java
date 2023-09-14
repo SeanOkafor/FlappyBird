@@ -13,7 +13,7 @@ public class Enity {
     double gravity = 0.3;
     //I added a max speed that the object can fall at
     double MAXSPEED = 11;
-    //Birdie
+    
     public BufferedImage birdie;
     
     public String direction;

@@ -1,13 +1,14 @@
 package entity;
 
-        import main.GamePanel;
-        import main.KeyHandler;
+import main.GamePanel;
+import main.KeyHandler;
 
-        import java.awt.*;
-        import java.awt.image.BufferedImage;
-        import java.io.IOException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
-        import javax.imageio.ImageIO;
+import javax.imageio.ImageIO;
 //import javax.swing.ImageIcon; only for now
 //import javax.swing.JLabel;
 
@@ -20,7 +21,6 @@ public class Player extends Enity{
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-
         setDefaultValues();
         getPlayerImage();
     }
@@ -31,15 +31,15 @@ public class Player extends Enity{
         direction = "bird";
     }
     public void getPlayerImage() {
-
-        try {
-            //introducing the bird from the file into the program
-            birdie = ImageIO.read(getClass().getResourceAsStream("/player/birdie.png"));
-
-        }catch(IOException e) {
-            e.printStackTrace();
-
-        }
+    	
+    	try {
+    		//introducing the bird from the file into the program
+    		birdie = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/birdie.png")));
+    		
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    		
+    	}
     }
     public void update() {
 
@@ -63,18 +63,17 @@ public class Player extends Enity{
         }
     }
     public void draw(Graphics2D g2) {
-        BufferedImage image = null;
+    	
+    	BufferedImage image = null;
 //        g2.setColor(Color.white);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-        switch(direction) {
-            case "bird":
-                image = birdie;
-                break;
+        if (direction.equals("bird")) {
+            image = birdie;
         }
-
-
+    	
+    
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-    }
+    }   
 
 
 
