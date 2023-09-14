@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
-//import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon; only for now
 //import javax.swing.JLabel;
 
 public class Player extends Enity{
