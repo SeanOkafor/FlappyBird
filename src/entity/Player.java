@@ -6,10 +6,11 @@ import main.KeyHandler;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+//import javax.swing.ImageIcon;
+//import javax.swing.JLabel;
 
 public class Player extends Enity{
 
@@ -25,7 +26,7 @@ public class Player extends Enity{
     }
     public void setDefaultValues() {
 
-        x = 40; // same values as "playerX and Y, just moved here for simplicities sake
+        x = 40; // same values as "playerX and Y, just moved here to make life easy
         y = 200;
         direction = "bird";
     }
@@ -33,7 +34,7 @@ public class Player extends Enity{
     	
     	try {
     		//introducing the bird from the file into the program
-    		birdie = ImageIO.read(getClass().getResourceAsStream("/player/birdie.png"));
+    		birdie = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/birdie.png")));
     		
     	}catch(IOException e) {
     		e.printStackTrace();
@@ -66,12 +67,9 @@ public class Player extends Enity{
     	BufferedImage image = null;
 //        g2.setColor(Color.white);
 //        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-    	switch(direction) {
-    	case "bird":
-    		image = birdie;
-    			break;
-    		
-    	}
+        if (direction.equals("bird")) {
+            image = birdie;
+        }
     	
     
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
