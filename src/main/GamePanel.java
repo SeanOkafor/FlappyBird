@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serial;
-import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -18,9 +16,6 @@ public class GamePanel extends JPanel implements Runnable{
 	//SCREEN SETTINGS
 	final int originalTileSize = 16; // 16x16
 	final int scale = 3;
-	@Serial
-	private static final long serialVersionUID = 1L;
-	//SCREEN SETTINGS
 	
 	public final int tileSize = originalTileSize * scale; // 48x48
 	final int maxScreenCol = 7;
@@ -28,7 +23,6 @@ public class GamePanel extends JPanel implements Runnable{
 	final int screenWidth = tileSize * maxScreenCol; // 768 pixels
 	final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 	public  BufferedImage bg;
-
 
 
 	//FPS
@@ -106,7 +100,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 		//introducing the background into the program
 		try {
-			bg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/background.png")));
+			bg = ImageIO.read(getClass().getResourceAsStream("/player/background.png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
