@@ -112,7 +112,6 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		//calling on previous method of the background
 		getBackgroundImage();
-		
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.drawImage(bg, 0,0, 904, 504, null); //painting the background to the screen dimensions (subject to change)
